@@ -9,4 +9,4 @@ xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch:9200" ]
 xpack.monitoring.enabled: true
 # At the end of the trial period, some features operate in a degraded mode. You can revert to Basic, extend the trial, or purchase a subscription.
 xpack.monitoring.elasticsearch.username: elastic
-xpack.monitoring.elasticsearch.password: elkstack2020
+xpack.monitoring.elasticsearch.password: xxxxxxxx
