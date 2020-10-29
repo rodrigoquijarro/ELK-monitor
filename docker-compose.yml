@@ -1,11 +1,20 @@
-version: '3.2'
 
+version: '3.2'
+# *********************************************************************
+# *                               ELK-Stack                           *
+# *********************************************************************
+#
+# ELK-Stack involve the following services to be installed:
+# 1. Logstash (Based on ths last version, pull it for $ELK_VERSION).
+# 2. Elasticsearch with xpack-security plugin (Based on ths last version, pull it for $ELK_VERSION).
+# 3. Kibana (Based on ths last version, pull it for $ELK_VERSION).
 services:
+# ELASTICSEARCH
+# -------------
+
   elasticsearch:
-    build:
-      context: elasticsearch/
-      args:
-        ELK_VERSION: $ELK_VERSION
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
+    container_name: elasticsearch
     volumes:
       - type: bind
         source: ./elasticsearch/config/elasticsearch.yml
@@ -19,18 +28,22 @@ services:
       - "9300:9300"
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-      ELASTIC_PASSWORD: changeme
-      # Use single node discovery in order to disable production mode and avoid bootstrap checks.
-      # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+      ELASTIC_PASSWORD: elkstack2020
       discovery.type: single-node
     networks:
-      - elk
+      - elkstack
+# Notes:
+# a) Single-node - Used to bind transport to an external interface for testing their usage of the transport client.
+# b) Port 9200 - Search, Aggregations and Monitoring.
+# c) Port 9300 - Communication between nodes.
+# ----------------------------------------------------------------------
+
+# LOGSTASH
+# --------
 
   logstash:
-    build:
-      context: logstash/
-      args:
-        ELK_VERSION: $ELK_VERSION
+    image: docker.elastic.co/logstash/logstash:7.9.2         
+    container_name: logstash
     volumes:
       - type: bind
         source: ./logstash/config/logstash.yml
@@ -46,17 +59,23 @@ services:
       - "5000:5000/udp"
       - "9600:9600"
     environment:
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      LS_JAVA_OPTS: "-Xmx512m -Xms512m"
     networks:
-      - elk
+      - elkstack
     depends_on:
       - elasticsearch
+# Notes:
+# a) LS_JAVA_OPTS - Heap size for Java Virtual Machine
+# b) Port 5044 - Default Beats port.
+# c) Port 5000 - Default Logstash port. 
+# d) Port 9600 - Web API calls.
+# ----------------------------------------------------------------------
+
+# KIBANA
 
   kibana:
-    build:
-      context: kibana/
-      args:
-        ELK_VERSION: $ELK_VERSION
+    image: docker.elastic.co/kibana/kibana:7.9.2
+    container_name: kibana
     volumes:
       - type: bind
         source: ./kibana/config/kibana.yml
@@ -65,13 +84,23 @@ services:
     ports:
       - "5601:5601"
     networks:
-      - elk
+      - elkstack
     depends_on:
       - elasticsearch
+# Notes:
+# a) Port 5601 - Kibana Web Application default port.
+# ----------------------------------------------------------------------
 
+# PARAMETERS
+# ----------
+
+# Networklogstash 5000 port
+# ------
 networks:
-  elk:
+  elkstack:
     driver: bridge
 
+# Volumes
+# -------
 volumes:
   elasticsearch:
