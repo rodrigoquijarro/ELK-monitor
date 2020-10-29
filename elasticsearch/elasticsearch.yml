@@ -1,0 +1,11 @@
+---
+## Elasticsearch configuration.
+cluster.name: "docker-cluster"
+network.host: 0.0.0.0
+
+## X-Pack configuration.
+## X-Pack configuration can be modified changing the 'trial' version to 'basic' version.
+#
+xpack.license.self_generated.type: trial
+xpack.security.enabled: true
+xpack.monitoring.collection.enabled: true
