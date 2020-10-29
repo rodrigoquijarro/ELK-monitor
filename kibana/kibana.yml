@@ -9,4 +9,4 @@ monitoring.ui.container.elasticsearch.enabled: true
 ## X-Pack security credentials
 #
 elasticsearch.username: elastic
-elasticsearch.password: elkstack2020
+elasticsearch.password: xxxxxxxx
