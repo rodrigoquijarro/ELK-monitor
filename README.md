@@ -3,7 +3,7 @@
 
 ## Purpose
 
-The purpose of the project is to understand what is ELK-Stack, what are their components and how to implement them in a virtual enviroment, to provide a powerful platform to aggregate logs from multiple systems, and centralize the data with a set of tools for metric analysis.
+The purpose of the project is to understand what is ELK-Stack, what are their components and how to implement them in a virtual environment, to provide a powerful platform to aggregate logs from multiple systems, and centralize the data with a set of tools for metric analysis.
    
 ## Planned learning outcomes;
 Capacity to integrate ELK-Stack components, evaluate and manage real data-log and how to ingest, search and visualize it. The learning outcome covers Logstash configuration, Elasticsearch overview, Filebeat, Metricbeat and Winlogbeat deployment, Kibana dashboards creation and recommended architecture for designing a monitoring and observability log system.
