@@ -1,5 +1,5 @@
 # ELK-monitor
-Elasticsearch - Logstash - Kibana monitoribg stack.
+Performance Monitoring with Docker & ELK Stack.
 
 
 ## Purpose
