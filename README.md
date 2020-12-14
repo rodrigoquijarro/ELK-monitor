@@ -1,5 +1,4 @@
-# ELK-monitor
-Performance Monitoring with Docker & ELK Stack.
+# Performance Monitoring with Docker & ELK Stack.
 
 
 ## Purpose
